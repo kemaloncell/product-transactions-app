@@ -3,26 +3,26 @@
     <div class="row">
       <div class="col-6 offset-3 pt-3 card mt-5 shadow">
         <div class="card-body">
-          <h3>Ürün İşlemleri</h3>
+          <h3>Product Transactions</h3>
           <hr />
           <div class="form-group">
-            <label>Ürün Adı</label>
-            <input type="text" class="form-control" placeholder="Ürün adını giriniz.." />
+            <label>Product Name</label>
+            <input type="text" class="form-control" placeholder="Enter the product name.." />
           </div>
           <div class="form-group">
-            <label>Adet</label>
-            <input type="text" class="form-control" placeholder="Ürün adetini giriniz.." />
+            <label>Quantity</label>
+            <input type="text" class="form-control" placeholder="Enter the number of products.." />
           </div>
           <div class="form-group">
-            <label>Fiyat</label>
-            <input type="text" class="form-control" placeholder="Ürün fiyatı giriniz.." />
+            <label>Price</label>
+            <input type="text" class="form-control" placeholder="Enter the product price.." />
           </div>
           <div class="form-group">
-            <label>Açıklama</label>
-            <textarea cols="30" rows="5" placeholder="Ürüne ait bir açıklama giriniz..." class="form-control"></textarea>
+            <label>Description</label>
+            <textarea cols="30" rows="5" placeholder="Enter a description of the product..." class="form-control"></textarea>
           </div>
           <hr />
-          <button class="btn btn-primary">Kaydet</button>
+          <button class="btn btn-primary">Save</button>
         </div>
       </div>
     </div>

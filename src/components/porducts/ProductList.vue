@@ -3,15 +3,15 @@
     <div class="row">
       <div class="col-12 mb-5 card mt-5 shadow">
         <div class="card-body">
-          <h3>Ürün Listesi</h3>
+          <h3>Product List</h3>
           <hr />
           <table class="table table-hover table-striped table-bordered">
             <thead>
               <th>id</th>
-              <th>Ürün Adı</th>
-              <th>Adet</th>
-              <th>Fiyat</th>
-              <th>Açıklama</th>
+              <th>Product Name</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Description</th>
             </thead>
             <tbody>
               <tr>
@@ -24,9 +24,9 @@
             </tbody>
           </table>
           <div class="alert alert-warning">
-            <strong>Henüz Burada Bir Kayıt Bulamadık</strong>
+            <strong>We Haven't Found Any Records Here Yet</strong>
             <br />
-            <small>Kayıt Eklemek için Ürün İşlemleri menüsünden yararlanabilirsiniz </small>
+            <small>You can use the Product Transactions menu to add a record. </small>
           </div>
         </div>
       </div>

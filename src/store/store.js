@@ -6,7 +6,7 @@ import * as mutations from "./mutations";
 import * as actions from "./actions";
 
 Vue.use(Vuex);
-export const Store = new Vuex.Store({
+export const store = new Vuex.Store({
   state: {
     purchase: 0.0,
     sale: 0.0,

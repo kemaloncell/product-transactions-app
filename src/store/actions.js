@@ -11,4 +11,8 @@ export const setTradeResult = ({ commit, state }, tradeResult) => {
   });
 };
 
-export const getTradeResult = ({ commit }) => {};
+export const getTradeResult = ({ commit }) => {
+  Vue.http.get("https://product-transactions-app-default-rtdb.firebaseio.com/trade-result.json").then((response) => {
+    commit("updateTradeResult", response.body);
+  });
+};

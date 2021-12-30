@@ -22,12 +22,20 @@ const actions = {
   initApp({ commit }) {
     // vue resource transactions
   },
-  saveProduct({ commit, state }, product) {
+  saveProduct({ dispatch, commit }, product) {
     // vue resource transactions
     Vue.http.post("https://product-transactions-app-default-rtdb.firebaseio.com/products.json", product).then((response) => {
+      /**  Update Product List */
       product.key = response.body.name;
       commit("updateProductList", product);
-      console.log(state.products);
+
+      /** Updating Buying, Selling, balance information */
+      let tradeResult = {
+        purchase: product.price,
+        sale: 0,
+        count: product.count,
+      };
+      dispatch("setTradeResult", tradeResult);
     });
   },
   sellProduct({ commit }, payload) {

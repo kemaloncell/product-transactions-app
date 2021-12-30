@@ -1,4 +1,4 @@
-# urun-islemleri
+# product transactions app
 
 > A Vue.js project
 

@@ -5,7 +5,7 @@
         <div class="card-body">
           <h3>Product List</h3>
           <hr />
-          <table class="table table-hover table-striped table-bordered">
+          <table class="table table-hover table-striped table-bordered" v-if="this.getProducts.length > 0">
             <thead>
               <th>id</th>
               <th>Product Name</th>
@@ -25,7 +25,7 @@
               </tr>
             </tbody>
           </table>
-          <div class="alert alert-warning">
+          <div class="alert alert-warning" v-else>
             <strong>We Haven't Found Any Records Here Yet</strong>
             <br />
             <small>You can use the Product Transactions menu to add a record. </small>

@@ -1,4 +1,5 @@
 import Vue from "vue";
+import { router } from "../../router";
 const state = {
   // all product list
   products: [],
@@ -36,6 +37,7 @@ const actions = {
         count: product.count,
       };
       dispatch("setTradeResult", tradeResult);
+      router.replace("/");
     });
   },
   sellProduct({ commit }, payload) {

@@ -38,11 +38,13 @@ export default {
         count: null,
         price: null,
         description: "",
+        saveButtonClicked: false,
       },
     };
   },
   methods: {
     saveProduct() {
+      this.saveButtonClicked = true;
       this.$store.dispatch("saveProduct", this.product);
     },
   },
@@ -56,7 +58,7 @@ export default {
     },
   },
   beforeRouteLeave(to, from, next) {
-    if (this.product.title !== "" || this.product.count !== "" || this.product.price !== "" || this.product.description !== "") {
+    if ((this.product.title !== "" || this.product.count !== "" || this.product.price !== "" || this.product.description !== "") && !this.saveButtonClicked) {
       if (confirm("There are unsaved changes. Do you still want to go out?")) {
         next();
       } else {

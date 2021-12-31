@@ -55,6 +55,17 @@ export default {
       }
     },
   },
+  beforeRouteLeave(to, from, next) {
+    if (this.product.title !== "" || this.product.count !== "" || this.product.price !== "" || this.product.description !== "") {
+      if (confirm("There are unsaved changes. Do you still want to go out?")) {
+        next();
+      } else {
+        next(false);
+      }
+    } else {
+      next();
+    }
+  },
 };
 </script>
 

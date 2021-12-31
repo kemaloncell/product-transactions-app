@@ -22,7 +22,7 @@
             <textarea v-model="product.description" cols="30" rows="5" placeholder="Enter a description of the product..." class="form-control"></textarea>
           </div>
           <hr />
-          <button class="btn btn-primary" @click="saveProduct">Save</button>
+          <button class="btn btn-primary" :disabled="saveEnabled" @click="saveProduct">Save</button>
         </div>
       </div>
     </div>
@@ -44,6 +44,15 @@ export default {
   methods: {
     saveProduct() {
       this.$store.dispatch("saveProduct", this.product);
+    },
+  },
+  computed: {
+    saveEnabled() {
+      if (this.product.title !== "" && this.product.count !== "" && this.product.price !== "" && this.product.description !== "") {
+        return false;
+      } else {
+        return true;
+      }
     },
   },
 };

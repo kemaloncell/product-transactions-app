@@ -6,6 +6,7 @@ export const setTradeResult = ({ commit, state }, tradeResult) => {
     purchase: state.purchase,
     sale: state.sale,
   };
+  console.log(tradeData);
   Vue.http.put("https://product-transactions-app-default-rtdb.firebaseio.com/trade-result.json", tradeData).then((response) => {
     console.log(response);
   });

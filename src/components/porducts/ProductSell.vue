@@ -7,23 +7,25 @@
           <hr />
           <div class="form-group">
             <label>Product Name</label>
-            <select class="form-control" v-model="selectedProduct">
+            <select class="form-control" v-model="selectedProduct" @change="productSelected">
               <option :value="products.key" v-for="products in getProducts" :key="products.key">{{ products.title }}</option>
             </select>
           </div>
-          <div class="card mb-2 border border-danger">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-12 text-center">
-                  <div class="mb-3">
-                    <span class="badge badge-info">Stok : {{ getProducts.count }}</span>
-                    <span class="badge badge-primary">Price : {{ getProducts.price | currency }}</span>
+          <transition name="fade" mode="out-in">
+            <div class="card mb-2 border border-danger" v-if="product !== null">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12 text-center">
+                    <div class="mb-3">
+                      <span class="badge badge-info">Stok : {{ product.count }}</span>
+                      <span class="badge badge-primary">Price : {{ product.price | currency }}</span>
+                    </div>
+                    <p class="border border-warning p-2 text-secondary">{{ product.description }}</p>
                   </div>
-                  <p class="border border-warning p-2 text-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda debitis deleniti eos impedit iste numquam quos sit. Dignissimos, mollitia nemo officia reiciendis repellendus rerum velit. Eos libero magnam quas tempore!</p>
                 </div>
               </div>
             </div>
-          </div>
+          </transition>
           <div class="form-group">
             <label>Quantity</label>
             <input type="text" class="form-control" placeholder="Enter the number of products.." />
@@ -42,14 +44,32 @@ export default {
   data() {
     return {
       selectedProduct: null,
+      product: null,
     };
   },
   computed: mapGetters(["getProducts"]),
+  methods: {
+    productSelected() {
+      this.product = this.$store.getters.getProduct(this.selectedProduct)[0];
+    },
+  },
 };
 </script>
 
 <style scoped>
 .border-danger {
   border-style: dashed !important;
+}
+.fade-active {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: opacity 0.3s ease-out;
+}
+.fade-leave {
+}
+.fade-leave-active {
+  transition: opacity 0.3s ease-out;
+  opacity: 0;
 }
 </style>

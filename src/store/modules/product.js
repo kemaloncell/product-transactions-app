@@ -10,7 +10,10 @@ const getters = {
     return state.products;
   },
   getProduct(state) {
-    // get product
+    return (key) =>
+      state.products.filter((element) => {
+        return element.key == key;
+      });
   },
 };
 const mutations = {

@@ -29,10 +29,10 @@
           </transition>
           <div class="form-group">
             <label>Quantity</label>
-            <input type="text" class="form-control" placeholder="Enter the number of products.." />
+            <input type="text" v-model="product_count" class="form-control" placeholder="Enter the number of products.." />
           </div>
           <hr />
-          <button class="btn btn-primary">Save</button>
+          <button @click="save" class="btn btn-primary">Save</button>
         </div>
       </div>
     </div>
@@ -46,12 +46,20 @@ export default {
     return {
       selectedProduct: null,
       product: null,
+      product_count: null,
     };
   },
   computed: mapGetters(["getProducts"]),
   methods: {
     productSelected() {
       this.product = this.$store.getters.getProduct(this.selectedProduct)[0];
+    },
+    save() {
+      let product = {
+        key: this.selectedProduct,
+        count: this.product_count,
+      };
+      this.$store.dispatch("sellProduct", product);
     },
   },
 };

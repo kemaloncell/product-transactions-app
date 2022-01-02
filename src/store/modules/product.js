@@ -50,8 +50,30 @@ const actions = {
       router.replace("/");
     });
   },
-  sellProduct({ commit }, payload) {
+  sellProduct({ state, commit, dispatch }, payload) {
     // vue resource transactions
+
+    // pass by reference
+    // pass by value
+    let product = state.products.filter((element) => {
+      return element.key == payload.key;
+    });
+    if (product) {
+      // Z = X - Y
+      let totalCount = product[0].count - payload.count;
+      Vue.http.patch(`https://product-transactions-app-default-rtdb.firebaseio.com/products/${payload.key}.json`, { count: totalCount }).then((response) => {
+        product[0].count = totalCount;
+
+        /** Updating Buying, Selling, balance information */
+        let tradeResult = {
+          purchase: 0,
+          sale: product[0].price,
+          count: payload.count,
+        };
+        dispatch("setTradeResult", tradeResult);
+        router.replace("/");
+      });
+    }
   },
 };
 export default {

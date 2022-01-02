@@ -51,8 +51,6 @@ const actions = {
     });
   },
   sellProduct({ state, commit, dispatch }, payload) {
-    // vue resource transactions
-
     // pass by reference
     // pass by value
     let product = state.products.filter((element) => {

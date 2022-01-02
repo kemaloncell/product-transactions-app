@@ -1,5 +1,13 @@
 <template>
   <div class="container">
+    <!-- loading bar start -->
+    <div class="loading" :style="isLoading">
+      <div class="lds-ripple">
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <!-- loading bar end -->
     <div class="row">
       <div class="col-6 offset-3 pt-3 card mt-5 shadow">
         <div class="card-body">
@@ -32,7 +40,7 @@
             <input type="text" v-model="product_count" class="form-control" placeholder="Enter the number of products.." />
           </div>
           <hr />
-          <button @click="save" class="btn btn-primary">Save</button>
+          <button @click="save" :disabled="saveEnabled" class="btn btn-primary">Save</button>
         </div>
       </div>
     </div>
@@ -47,20 +55,53 @@ export default {
       selectedProduct: null,
       product: null,
       product_count: null,
+      saveButtonClicked: false,
     };
   },
-  computed: mapGetters(["getProducts"]),
+  computed: {
+    ...mapGetters(["getProducts"]),
+    isLoading() {
+      if (this.saveButtonClicked) {
+        return {
+          display: "block",
+        };
+      } else {
+        return {
+          display: "none",
+        };
+      }
+    },
+    saveEnabled() {
+      if (this.selectedProduct !== null && this.product_count > 0) {
+        return false;
+      } else {
+        return true;
+      }
+    },
+  },
   methods: {
     productSelected() {
       this.product = this.$store.getters.getProduct(this.selectedProduct)[0];
     },
     save() {
+      this.saveButtonClicked = true;
       let product = {
         key: this.selectedProduct,
         count: this.product_count,
       };
       this.$store.dispatch("sellProduct", product);
     },
+  },
+  beforeRouteLeave(to, from, next) {
+    if ((this.selectedProduct !== null || this.product_count !== null) && !this.saveButtonClicked) {
+      if (confirm("There are unsaved changes. Do you still want to go out?")) {
+        next();
+      } else {
+        next(false);
+      }
+    } else {
+      next();
+    }
   },
 };
 </script>

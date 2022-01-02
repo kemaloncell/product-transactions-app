@@ -38,6 +38,7 @@
           <div class="form-group">
             <label>Quantity</label>
             <input type="text" v-model="product_count" class="form-control" placeholder="Enter the number of products.." />
+            <small v-if="product_count != null && product_count > product.count" class="form-text text-danger">Please enter a valid value!</small>
           </div>
           <hr />
           <button @click="save" :disabled="saveEnabled" class="btn btn-primary">Save</button>
@@ -48,14 +49,15 @@
 </template>
 
 <script>
+import { productMixin } from "../../productMixin";
 import { mapGetters } from "vuex";
 export default {
+  mixins: [productMixin],
   data() {
     return {
       selectedProduct: null,
       product: null,
       product_count: null,
-      saveButtonClicked: false,
     };
   },
   computed: {
@@ -71,25 +73,23 @@ export default {
         };
       }
     },
-    saveEnabled() {
-      if (this.selectedProduct !== null && this.product_count > 0) {
-        return false;
-      } else {
-        return true;
-      }
-    },
   },
   methods: {
     productSelected() {
       this.product = this.$store.getters.getProduct(this.selectedProduct)[0];
     },
     save() {
-      this.saveButtonClicked = true;
-      let product = {
-        key: this.selectedProduct,
-        count: this.product_count,
-      };
-      this.$store.dispatch("sellProduct", product);
+      if (this.product.count < this.product_count) {
+        alert("There are not enough items in stock!");
+      } else {
+        this.saveButtonClicked = true;
+        let product = {
+          key: this.selectedProduct,
+          count: this.product_count,
+        };
+
+        this.$store.dispatch("sellProduct", product);
+      }
     },
   },
   beforeRouteLeave(to, from, next) {

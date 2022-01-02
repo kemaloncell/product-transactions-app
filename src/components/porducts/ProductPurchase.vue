@@ -38,7 +38,9 @@
 </template>
 
 <script>
+import { productMixin } from "../../productMixin";
 export default {
+  mixins: [productMixin],
   data() {
     return {
       product: {
@@ -47,7 +49,6 @@ export default {
         price: null,
         description: "",
       },
-      saveButtonClicked: false,
     };
   },
   methods: {
@@ -62,17 +63,6 @@ export default {
         return false;
       } else {
         return true;
-      }
-    },
-    isLoading() {
-      if (this.saveButtonClicked) {
-        return {
-          display: "block",
-        };
-      } else {
-        return {
-          display: "none",
-        };
       }
     },
   },

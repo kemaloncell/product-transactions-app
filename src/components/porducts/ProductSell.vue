@@ -8,7 +8,8 @@
           <div class="form-group">
             <label>Product Name</label>
             <select class="form-control" v-model="selectedProduct" @change="productSelected">
-              <option :value="products.key" v-for="products in getProducts" :key="products.key">{{ products.title }}</option>
+              <option selected disabled>Please select a product...</option>
+              <option :disabled="products.count == 0" :value="products.key" v-for="products in getProducts" :key="products.key">{{ products.title }}</option>
             </select>
           </div>
           <transition name="fade" mode="out-in">
